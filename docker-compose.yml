@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    container_name: vehicle-backend
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./backend:/app/backend
+      - sqlite_data:/app/backend
+
+    command: python manage.py runserver 0.0.0.0:8000
+
+  frontend:
+    build: ../vehicle-service-booking-frontend
+    container_name: vehicle-frontend
+
+    ports:
+      - "5173:5173"
+
+    volumes:
+      - ../vehicle-service-booking-frontend:/app
+      - /app/node_modules
+
+    command: npm run dev -- --host
+
+    depends_on:
+      - backend
+
+volumes:
+  sqlite_data:
