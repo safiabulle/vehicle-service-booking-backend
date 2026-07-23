@@ -23,8 +23,9 @@ class Payment(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
     payment_method = models.CharField(
-        max_length=20,
-        choices=Method.choices,
+    max_length=20,
+    choices=Method.choices,
+    blank=True,
     )
 
     payment_status = models.CharField(
@@ -34,8 +35,8 @@ class Payment(models.Model):
     )
 
     transaction_reference = models.CharField(
-        max_length=100,
-        unique=True,
+    max_length=100,
+    blank=True,
     )
 
     payment_date = models.DateTimeField(auto_now_add=True)

@@ -5,8 +5,8 @@ from .models import Appointment
 
 class AppointmentSerializer(serializers.ModelSerializer):
     customer_name = serializers.CharField(
-        source="customer.username",
-        read_only=True,
+    source="customer.username",
+    read_only=True,
     )
 
     vehicle_registration = serializers.CharField(
