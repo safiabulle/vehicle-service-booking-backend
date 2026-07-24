@@ -17,9 +17,10 @@ COPY . .
 
 # If your manage.py is inside a 'backend' folder, adjust this. 
 # (If your manage.py is right in the root folder, remove the 'backend/' part below)
+# (Keep everything else in your Dockerfile the same, and change the final CMD line to:)
+
 WORKDIR /app/backend
 
 EXPOSE 10000
 
-# Explicitly use python -m gunicorn to ensure it finds the package
-CMD ["sh", "-c", "python -m gunicorn --bind 0.0.0.0:$PORT config.wsgi:application"]
+CMD ["sh", "-c", "python manage.py migrate && python -m gunicorn --bind 0.0.0.0:$PORT --access-logfile - --error-logfile - config.wsgi:application"]
