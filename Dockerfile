@@ -15,4 +15,4 @@ WORKDIR /app/backend
 
 EXPOSE 8000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "config.wsgi:application"]
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:$PORT config.wsgi:application"]
